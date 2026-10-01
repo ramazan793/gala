@@ -21,8 +21,11 @@
 .hero--v2 .hero__sub { margin-top: 18px; text-wrap: balance; }
 .hero--v2 .hero__kicker span { text-wrap: balance; }
 
-.hero--v2 .authors { justify-content: center; margin: clamp(28px, 4.5vh, 44px) 0 0; }
-.hero--v2 .authors a { text-align: left; }
+/* author cards without photos: name over affiliation, centred */
+.hero--v2 .authors { justify-content: center; gap: 6px 22px; margin: clamp(26px, 4vh, 40px) 0 0; }
+.hero--v2 .authors a { padding: 7px 16px; text-align: center; }
+.hero--v2 .authors b { font-size: 18px; }
+.hero--v2 .authors i { font-size: 15.5px; }
 .hero--v2 .cells--links { margin-top: clamp(24px, 3.5vh, 34px); }
 
 /* ------------------------------------------------------------ 2. the sections */
@@ -66,6 +69,8 @@
 @media (max-width: 640px) {
   .hero--v2 .hero__inner { padding-top: 36px; }
   .hero--v2 .hero__mark { width: 36px; height: 36px; }
-  /* the cards stack with their photos in one column, and the column as a whole is centred */
-  .hero--v2 .authors { display: inline-flex; flex-direction: column; align-items: flex-start; }
+  .hero--v2 .authors { gap: 2px 6px; }
+  .hero--v2 .authors a { padding: 6px 10px; }
+  .hero--v2 .authors b { font-size: 16.5px; }
+  .hero--v2 .authors i { font-size: 14.5px; }
 }

@@ -5,3 +5,7 @@ tools/
 static/paper/
 # local notes on how the page is put together
 README.md
+# author photos: no longer shown on the page
+static/img/authors/
+# local draft copy of the page
+index_v2.html
