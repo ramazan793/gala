@@ -189,6 +189,7 @@ button { font: inherit; color: inherit; }
 
 .lead { max-width: 780px; color: var(--grey); font-size: 18px; margin-bottom: 30px; }
 .lead--after { margin-top: 34px; }
+.lead--tight { margin-bottom: 16px; }
 .note { margin: 14px 0 0; max-width: 900px; font-size: 15px; line-height: 1.5; color: var(--light); }
 .note a { color: var(--grey); }
 .note--refs { margin-top: 6px; }
