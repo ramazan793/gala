@@ -3,3 +3,5 @@
 tools/
 # web copy of the paper: not linked from the page
 static/paper/
+# local notes on how the page is put together
+README.md
