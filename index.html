@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GALA: One Basis to Animate Them All</title>
+  <meta name="description" content="GALA distills pretrained Gaussian avatar models into one shared blendshape basis and a shallow coefficient network: CPU animation up to three orders of magnitude faster, at 60 fps in a phone's web browser.">
+  <meta name="keywords" content="GALA, Gaussian avatars, blendshapes, distillation, 3D Gaussian splatting, real-time animation, AGORA, FlexAvatar, DynaAvatar">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="One Basis to Animate Them All">
+  <meta property="og:description" content="Gaussian Blendshape Distillation for Real-Time Avatars. One shared basis, a shallow network and a linear blend: 60 fps in a phone's web browser.">
+  <meta property="og:image" content="https://ramazan793.github.io/gala/static/img/social_preview.jpg">
+  <meta property="og:url" content="https://ramazan793.github.io/gala/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="static/img/favicon.svg">
+  <link rel="stylesheet" href="static/css/style.css">
+  <script>document.documentElement.className = 'js';</script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="#top" aria-label="GALA, back to top">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="10" height="10" fill="#B8352C"/><rect x="11" y="11" width="10" height="10" fill="#2B85C4"/><rect x="20" y="20" width="10" height="10" fill="#2C9A4F"/></svg>
+      <span>GALA</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#video">Video</a>
+      <a href="#problem">Problem</a>
+      <a href="#finding">Finding</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#device">On device</a>
+      <a href="#bibtex">BibTeX</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================ hero -->
+<section class="hero" id="top">
+  <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="static/img/posters/hero_crowd.jpg" aria-hidden="true">
+    <source src="static/video/hero_crowd.mp4" type="video/mp4">
+  </video>
+  <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <ul class="cells cells--meta hero__meta" aria-label="About the clip in the background">
+      <li>web browser</li><li>10 avatars</li><li>30 fps</li>
+    </ul>
+    <div class="hero__title">
+      <p class="hero__kicker"><b>GALA</b> Gaussian Animation via Linear Approximation</p>
+      <h1>One Basis to Animate Them&nbsp;All</h1>
+      <p class="hero__sub">Gaussian Blendshape Distillation for Real-Time Avatars</p>
+
+      <!-- each card is one link: photo, name and affiliation -->
+      <ul class="authors">
+        <li>
+          <a href="https://ramazan793.github.io/" target="_blank" rel="noopener">
+            <img src="static/img/authors/ramazan.jpg" alt="" width="360" height="360">
+            <span><b>Ramazan Fazylov</b><i>MBZUAI</i></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=3Bawtm4AAAAJ" target="_blank" rel="noopener">
+            <img src="static/img/authors/stamatis.jpg" alt="" width="360" height="360">
+            <span><b>Stamatis Lefkimmiatis</b><i>MWS AI</i></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=-9ifK0cAAAAJ" target="_blank" rel="noopener">
+            <img src="static/img/authors/ivan.jpg" alt="" width="360" height="360">
+            <span><b>Ivan Laptev</b><i>MBZUAI</i></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Links. To switch the "soon" cell on, turn its <span class="is-soon"> into <a href="..."> and drop the <em>. -->
+      <div class="cells cells--links">
+        <!-- the arXiv glyph is from Academicons (SIL OFL 1.1), the GitHub glyph from Font Awesome Free (CC BY 4.0) -->
+        <span class="is-soon"><svg class="ico" viewBox="0 0 448 512" aria-hidden="true"><g transform="matrix(1.55 0 0 -1.55 -123.19936 553.59966)"><path d="m 119.65,351.996 c -5.84961,0.13477 -11.1943,-3.29883 -13.502,-8.67578 -2.19629,-5.27051 -0.61914,-8.9668 4.19727,-15.8652 7.05469,-10.3799 78.8242,-96.5625 78.8242,-96.5625 l -15.8828,-14.8633 c -13.3809,-13.3779 -13.9561,-31.333 -1.50977,-43.7754 l 18.4922,-17.6133 -51.5977,-63.377 c -4.00586,-4.26758 -6.48535,-11.7559 -4.24805,-17.1309 2.27832,-5.53613 7.69727,-9.12891 13.6836,-9.07031 3.83398,0.0957 7.43262,1.87402 9.83789,4.86133 l 61.3691,57.0566 94.5762,-90.0703 c 3.19434,-3.08398 7.44336,-4.83984 11.8828,-4.91016 1.60449,0.0039 3.19824,0.245117 4.73242,0.714844 5.7793,1.80566 10.249,6.41797 11.8711,12.252 1.2998,5.47363 -0.27637,11.2334 -4.18164,15.2832 l -83.0859,100.011996 14.8789,13.834 c 11.0957,10.0029 11.1543,27.3906 0.12695,37.4688 l -16.2949,15.6309 56.2559,66.4434 0.0742,0.0859 0.0664,0.0899 c 5.02734,6.53125 7.43164,11.5615 4.83984,17.9395 -3.13379,5.96875 -8.69727,10.29 -15.2559,11.8516 -0.67676,0.0908 -1.35938,0.13574 -2.04297,0.13671 l -0.004,-0.0117 c -4.42871,-0.27051 -8.61035,-2.13086 -11.7754,-5.24023 l -0.13086,-0.10743 -0.12304,-0.11132 -65.207,-59.127 -89.8965,86.2402 c 0,0 -5.33398,6.47754 -10.9707,6.61133 z m 178.104,-33.041 c 0.47852,-0.002 0.95703,-0.0332 1.43164,-0.0957 4.84277,-1.33301 8.95605,-4.54004 11.4316,-8.91016 1.44922,-3.5625 1.00293,-6.45703 -4.19727,-13.2148 l -56.0586,-66.2188 -26.375,25.3027 64.9551,58.9062 c 2.33887,2.41504 5.46484,3.91113 8.8125,4.2168 v 0.0137 z M 192.436,227.402 334.446,57.244 c 2.78711,-3.48926 4.5293,-6.97949 3.3418,-10.9121 -1.16113,-4.30273 -4.43457,-7.71777 -8.68555,-9.05664 -1.08105,-0.333984 -2.20508,-0.503906 -3.33594,-0.505859 -3.20801,0.07617 -6.26953,1.35645 -8.57617,3.58789 l -142.033,135.284999 c -11.1719,11.1719 -9.48242,26.0195 1.39258,36.8945 z"/></g></svg>arXiv <em>soon</em></span>
+        <a class="is-primary" href="#video">Video</a>
+        <a href="https://github.com/ramazan793/gala" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 496 512" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>Code</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ video + abstract -->
+<section class="section" id="video">
+  <div class="container">
+    <h2 class="h2">The whole idea in three minutes.</h2>
+    <p class="tldr reveal">
+      <b class="tldr__tag">TL;DR</b>
+      <span>
+        Gaussian avatars rerun <b class="c-host">a heavy network</b> for every new pose. GALA distills it into
+        <b class="c-basis">a linear blend of shared blendshapes</b> and a shallow MLP:
+        <b class="c-gala">up to ×2,659 faster</b> on CPU, without retraining it.
+      </span>
+    </p>
+    <div class="frame frame--video reveal">
+      <video controls playsinline preload="metadata" poster="static/img/posters/gala_overview.jpg">
+        <source src="static/video/gala_overview.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="about reveal">
+    <ul class="facts" aria-label="GALA at a glance">
+      <li><b class="c-gala">×2,659</b><span>the largest speedup of CPU animation</span></li>
+      <li><b class="c-gala">60 fps</b><span>in a phone’s web browser</span></li>
+      <li><b class="c-basis">1 basis</b><span>per model, shared by all identities</span></li>
+      <li><b class="c-host">0</b><span>host models retrained</span></li>
+    </ul>
+    <div class="abstract">
+      <h3 class="h3 h3--plain">Abstract</h3>
+      <!-- the first two sentences show; the button opens the rest (without the script everything shows) -->
+      <p>
+        3D Gaussian avatars support fast rendering, however, their real-time animation is often challenged by the
+        costly neural inference. We address this bottleneck and show that the animation of pretrained avatar models
+        can be closely approximated by a linear combination of identity-independent blendshapes.
+        <button class="abstract__toggle" id="abstractToggle" type="button" aria-expanded="false" aria-controls="abstractRest" aria-label="Show the rest of the abstract">…</button>
+        <span class="abstract__rest" id="abstractRest">Building on this
+        finding, we introduce <b>GALA</b> (<b>G</b>aussian <b>A</b>nimation via <b>L</b>inear <b>A</b>pproximation),
+        a distillation method that replaces per-frame heavy neural decoding with a shallow coefficient predictor and
+        a linear blend. To improve fidelity and reduce memory requirements, we propose to construct the basis using
+        block-local PCA under a rendering-aware metric and a memory budget. Our method learns a shallow MLP network
+        to predict blendshape coefficients and applies to various animation architectures without retraining original
+        models. We validate GALA by accelerating the inference of three distinct avatar models for 3D animation of
+        facial expressions and full-bodies with clothing dynamics. Across these models, our distillation generalizes
+        to held-out identities and reduces CPU animation cost by up to three orders of magnitude while preserving most
+        of the rendering quality. Excellent results of our method confirm the shared linear structure of learned
+        avatar representations and enable highly efficient and accurate animation at frame rates reaching up to
+        <span class="nb">60fps</span> on mobile devices.</span>
+      </p>
+      <button class="linkbtn abstract__less" id="abstractLess" type="button">Show less</button>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ problem -->
+<section class="section" id="problem">
+  <div class="container">
+    <h2 class="h2 h2--host">Gaussian avatars render fast. Animating them doesn’t.</h2>
+    <div class="split">
+      <div class="split__media reveal">
+        <div class="frame">
+          <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/problem_speed.jpg">
+            <source src="static/video/problem_speed.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="under under--speed">
+          <p><b>New viewpoint</b> rasterize only</p>
+          <p><b class="c-host">New pose</b> rerun the transformer</p>
+        </div>
+      </div>
+      <div class="split__text reveal">
+        <p>
+          A new viewpoint is cheap: <b>622&nbsp;fps</b>. A new pose reruns a large network:
+          <b class="c-host">1.8&nbsp;s</b>, even on a desktop GPU.
+        </p>
+        <p class="split__small">DynaAvatar on an RTX 6000 Ada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ speed -->
+<section class="section" id="speed">
+  <div class="container">
+    <h2 class="h2 h2--gala">Up to three orders of magnitude faster.</h2>
+    <p class="lead reveal">
+      GALA distills a pretrained avatar model, the <em>host</em>, into one shared blendshape basis and a shallow
+      network. Three very different hosts, none retrained.
+    </p>
+
+    <div class="race reveal" id="race">
+      <div class="race__panel race__panel--host"><span class="panel__title c-host">Host model</span></div>
+      <div class="race__panel race__panel--gala"><span class="panel__title c-gala">GALA (ours)</span></div>
+      <div class="race__panel race__panel--speed"><span class="panel__title">Speedup</span></div>
+
+      <div class="race__row" style="--r:2" data-host-ms="154" data-gala-ms="5.5">
+        <div class="race__host">
+          <figure><img src="static/img/glyphs/agora.png" alt="AGORA" width="898" height="451"><figcaption>Face 3D GAN (CNN)</figcaption></figure>
+          <div class="race__num"><b class="c-host">154 ms</b><span class="hud"><i data-count="host">0</i> frames</span></div>
+        </div>
+        <div class="race__arrow" aria-hidden="true"></div>
+        <div class="race__gala"><div class="race__num"><b class="c-gala">5.5 ms</b><span class="hud"><i data-count="gala">0</i> frames</span></div></div>
+        <div class="race__speed"><b>×28</b></div>
+      </div>
+
+      <div class="race__row" style="--r:3" data-host-ms="234" data-gala-ms="4.4">
+        <div class="race__host">
+          <figure><img src="static/img/glyphs/flex.png" alt="FlexAvatar" width="866" height="581"><figcaption>3D head transformer</figcaption></figure>
+          <div class="race__num"><b class="c-host">234 ms</b><span class="hud"><i data-count="host">0</i> frames</span></div>
+        </div>
+        <div class="race__arrow" aria-hidden="true"></div>
+        <div class="race__gala"><div class="race__num"><b class="c-gala">4.4 ms</b><span class="hud"><i data-count="gala">0</i> frames</span></div></div>
+        <div class="race__speed"><b>×53</b></div>
+      </div>
+
+      <div class="race__row" style="--r:4" data-host-ms="42900" data-gala-ms="16.1">
+        <div class="race__host">
+          <figure><img src="static/img/glyphs/dyna.png" alt="DynaAvatar" width="866" height="581"><figcaption>Clothed 3D body transformer</figcaption></figure>
+          <div class="race__num"><b class="c-host">42.9 s</b><span class="hud"><i data-count="host">0</i> frames</span><span class="race__bar" aria-hidden="true"><i data-bar></i></span></div>
+        </div>
+        <div class="race__arrow" aria-hidden="true"></div>
+        <div class="race__gala"><div class="race__num"><b class="c-gala">16.1 ms*</b><span class="hud"><i data-count="gala">0</i> frames</span></div></div>
+        <div class="race__speed"><b>×2,659</b></div>
+      </div>
+    </div>
+    <p class="note">
+      CPU time per animation step; the counters replay it. *With skinning.
+      <button class="linkbtn" id="raceRestart" type="button">Restart</button>
+    </p>
+    <p class="note note--refs">
+      Hosts: <a href="https://ramazan793.github.io/AGORA/" target="_blank" rel="noopener">AGORA</a> (Fazylov et al.),
+      FlexAvatar (Kirschstein et al., CVPR 2026), DynaAvatar (Kwon et al., CVPR 2026).
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ finding -->
+<section class="section" id="finding">
+  <div class="container">
+    <h2 class="h2 h2--basis">Animation is a linear combination of basis vectors.</h2>
+
+    <div class="finding reveal">
+      <div class="finding__step">
+        <p>Take the residual between the animated avatar and the neutral avatar of the same identity.</p>
+        <img class="eq" src="static/img/eq/eq_residual.svg" alt="r_i = A(w_i, theta_i) - A(w_i, theta_0)">
+      </div>
+      <div class="finding__step">
+        <p>It is closely approximated by a weighted sum of basis vectors.</p>
+        <img class="eq" src="static/img/eq/eq_sum.svg" alt="r_i is approximately c_i1 u_1 + c_i2 u_2 + ... = U c_i">
+      </div>
+      <dl class="finding__legend">
+        <div><dt class="c-basis">basis vectors</dt><dd>the same for all identities, even unseen ones</dd></div>
+        <div><dt class="c-gala">weights</dt><dd>depend on the identity and the pose</dd></div>
+      </dl>
+    </div>
+
+    <h3 class="h3 h3--basis">It even holds for identities never seen before.</h3>
+    <div class="unseen reveal">
+      <div class="quad">
+        <p><b>Input</b><span>one generated image</span></p>
+        <p><b><i class="c-host">FlexAvatar</i> host</b><span>original animation</span></p>
+        <p><b>Neutral only</b><span>no blendshapes</span></p>
+        <p><b class="c-basis">Projected</b><span>onto the shared basis</span></p>
+      </div>
+      <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/unseen.jpg">
+        <source src="static/video/unseen.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <h3 class="h3 h3--basis">Blendshapes are local, and shared.</h3>
+    <p class="lead reveal">
+      The same blendshapes close an eye, close a mouth or lift a jacket on every identity. Drag the slider.
+    </p>
+
+    <div class="blend reveal" id="blend">
+      <div class="blend__head" aria-hidden="true">
+        <span>Where</span><span>Identity 1</span><span>Identity 2</span><span>Identity 3</span>
+      </div>
+      <div class="blend__rows" aria-hidden="true">
+        <p style="--y0:0%;--y1:26.4%"><b>Eye</b><span>AGORA</span></p>
+        <p style="--y0:29%;--y1:55.4%"><b>Mouth</b><span>FlexAvatar</span></p>
+        <p style="--y0:58%;--y1:100%"><b>Garment</b><span>DynaAvatar</span></p>
+      </div>
+      <video class="blend__video" id="blendVideo" muted loop playsinline preload="metadata" poster="static/img/posters/blend_scrub.jpg">
+        <source src="static/video/blend_scrub.mp4" type="video/mp4">
+      </video>
+      <div class="blend__ctrl">
+        <span class="blend__end">−</span>
+        <input type="range" id="blendSlider" min="0" max="1000" value="0" aria-label="Blendshape activation, from the first state to the second">
+        <span class="blend__end">+</span>
+      </div>
+    </div>
+    <p class="note">First column: where they act. Each row moves a group of local blendshapes between two states.</p>
+  </div>
+</section>
+
+<!-- ============================================================ method -->
+<section class="section" id="method">
+  <div class="container">
+    <h2 class="h2">From a pretrained model to a linear blend.</h2>
+
+    <div class="stages reveal" id="stages" data-stage="all">
+      <div class="tabs" role="tablist" aria-label="Stages of the method">
+        <button class="tab is-active" type="button" role="tab" data-stage="all">Overview</button>
+        <button class="tab tab--host" type="button" role="tab" data-stage="host">Host model</button>
+        <button class="tab tab--basis" type="button" role="tab" data-stage="basis">Basis construction</button>
+        <button class="tab tab--gala" type="button" role="tab" data-stage="distill">Coefficient distillation</button>
+        <button class="tab tab--gala" type="button" role="tab" data-stage="inference">Inference</button>
+      </div>
+
+      <div class="stages__scroll">
+        <figure class="stages__fig">
+          <img src="static/img/figures/gala_overview.webp" width="2800" height="867"
+               alt="Overview of GALA: host model, basis construction, coefficient distillation, and inference once per subject and every frame.">
+          <i class="veil veil--host"></i><i class="veil veil--basis"></i><i class="veil veil--distill"></i><i class="veil veil--inference"></i>
+        </figure>
+      </div>
+
+      <div class="stages__text">
+        <div class="stage is-active" data-stage="all">
+          <h3 class="h3 h3--plain">Three steps, and the host is never retrained.</h3>
+          <p>Build one basis from the host’s residuals, train a shallow network to predict the coefficients, then blend. Click a stage.</p>
+        </div>
+        <div class="stage" data-stage="host">
+          <h3 class="h3 h3--host">A neural network recomputes the avatar at every frame.</h3>
+          <p>We run the host on many identities and poses, and keep each residual to the neutral avatar.</p>
+        </div>
+        <div class="stage" data-stage="basis">
+          <h3 class="h3 h3--basis">Many residuals, one basis: local, rendering-aware PCA.</h3>
+          <p>All residuals go into one matrix. A PCA over local blocks, in a rendering-aware metric and under a memory budget, gives the basis <i>U</i>.</p>
+          <div class="compare">
+            <div><b>Same memory budget</b><span>PSNR to host, AGORA</span></div>
+            <div><span>Simple PCA</span><b>32.8 dB</b></div>
+            <i class="compare__arrow" aria-hidden="true"></i>
+            <div class="c-basis"><span>Ours</span><b>42.6 dB</b></div>
+          </div>
+        </div>
+        <div class="stage" data-stage="distill">
+          <h3 class="h3 h3--gala">A shallow network learns the coefficients.</h3>
+          <p>A shallow MLP predicts the coefficients from the identity and the driving signal.</p>
+        </div>
+        <div class="stage" data-stage="inference">
+          <h3 class="h3 h3--gala">Every frame is a tiny network and a linear blend.</h3>
+          <div class="eqrow" role="img" aria-label="G hat = A(w, theta_0) + U c(w, theta)">
+            <div><img src="static/img/eq/eq_inf_lhs.svg" alt=""></div>
+            <div class="eqrow__term eqrow__term--host"><img src="static/img/eq/eq_inf_neutral.svg" alt=""><b>neutral avatar</b><span>once per subject</span></div>
+            <div><img src="static/img/eq/eq_inf_plus.svg" alt=""></div>
+            <div class="eqrow__term eqrow__term--gala"><img src="static/img/eq/eq_inf_blend.svg" alt=""><b>linear blend</b><span>every frame</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ results -->
+<section class="section" id="results">
+  <div class="container">
+    <h2 class="h2 h2--gala">GALA closely matches each host.</h2>
+    <p class="lead reveal">Expressions, mouth interiors and garment motion, at a few milliseconds per frame.</p>
+
+    <div class="results reveal" id="results-tabs">
+      <div class="tabs" role="tablist" aria-label="Host model">
+        <button class="tab tab--host" type="button" role="tab" data-host="agora"><b>AGORA</b><span>Face 3D GAN (CNN)</span></button>
+        <button class="tab tab--host is-active" type="button" role="tab" data-host="flex"><b>FlexAvatar</b><span>One-shot 3D head transformer</span></button>
+        <button class="tab tab--host" type="button" role="tab" data-host="dyna"><b>DynaAvatar</b><span>Clothed full-body transformer</span></button>
+      </div>
+
+      <div class="result" data-host="agora">
+        <div class="triple triple--head"><span class="c-host">Host</span><span class="c-gala">+GALA (ours)</span><span>Error</span></div>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/results_agora.jpg">
+          <source src="static/video/results_agora.mp4" type="video/mp4">
+        </video>
+        <div class="triple triple--foot"><span class="c-host">154 ms / frame</span><span class="c-gala">5.5 ms / frame</span><span class="colorbar"><img src="static/img/glyphs/inferno_bar.png" alt=""><i>0 – 0.2</i></span></div>
+      </div>
+      <div class="result is-active" data-host="flex">
+        <div class="triple triple--head"><span class="c-host">Host</span><span class="c-gala">+GALA (ours)</span><span>Error</span></div>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/results_flex.jpg">
+          <source src="static/video/results_flex.mp4" type="video/mp4">
+        </video>
+        <div class="triple triple--foot"><span class="c-host">234 ms / frame</span><span class="c-gala">4.4 ms / frame</span><span class="colorbar"><img src="static/img/glyphs/inferno_bar.png" alt=""><i>0 – 0.2</i></span></div>
+      </div>
+      <div class="result result--dyna" data-host="dyna">
+        <div class="triple triple--head"><span class="c-host">Host</span><span class="c-gala">+GALA (ours)</span><span>Error</span></div>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/results_dyna.jpg">
+          <source src="static/video/results_dyna.mp4" type="video/mp4">
+        </video>
+        <div class="triple triple--foot"><span class="c-host">42.9 s / frame</span><span class="c-gala">16.1 ms / frame</span><span class="colorbar"><img src="static/img/glyphs/inferno_bar.png" alt=""><i>0 – 0.2</i></span></div>
+      </div>
+    </div>
+
+    <h3 class="h3 h3--gala">Ahead of the state of the art on most metrics.</h3>
+    <div class="ranks reveal">
+      <article class="panel panel--gala">
+        <h4 class="panel__title"><span class="c-gala">GALA</span><span class="c-host">(AGORA)</span></h4>
+        <p class="ranks__bench">on FFHQ</p>
+        <p class="ranks__big"><b class="c-gala">3</b> of 5</p>
+        <p class="ranks__sub">metrics best, 1 second best</p>
+        <div class="ranks__cells">
+          <span class="rank rank--o">FID</span><span class="rank rank--s">AED</span><span class="rank rank--b">AED-jaw</span><span class="rank rank--b">ID</span><span class="rank rank--b">APD</span>
+        </div>
+        <p class="ranks__vs">vs Next3D, GAIA, EG3D, GGHead</p>
+      </article>
+      <article class="panel panel--gala">
+        <h4 class="panel__title"><span class="c-gala">GALA</span><span class="c-host">(FlexAvatar)</span></h4>
+        <p class="ranks__bench">on VFHQ and Ava256</p>
+        <p class="ranks__big"><b class="c-gala">8</b> of 12</p>
+        <p class="ranks__sub">metrics best, 2 second best</p>
+        <div class="ranks__cells">
+          <span class="rank rank--s" title="VFHQ, self-reenactment">PSNR</span><span class="rank rank--b" title="VFHQ, self-reenactment">LPIPS</span><span class="rank rank--b" title="VFHQ, self-reenactment">AED</span><i class="ranks__gap"></i><span class="rank rank--b" title="VFHQ, cross-reenactment">CSIM</span><span class="rank rank--b" title="VFHQ, cross-reenactment">AED</span><span class="rank rank--b" title="VFHQ, cross-reenactment">APD</span>
+        </div>
+        <div class="ranks__cells">
+          <span class="rank rank--b" title="Ava256, single-shot">PSNR</span><span class="rank rank--s" title="Ava256, single-shot">AKD</span><span class="rank rank--o" title="Ava256, single-shot">CSIM</span><i class="ranks__gap"></i><span class="rank rank--b" title="Ava256, few-shot">PSNR</span><span class="rank rank--o" title="Ava256, few-shot">AKD</span><span class="rank rank--b" title="Ava256, few-shot">CSIM</span>
+        </div>
+        <p class="ranks__vs">vs LAM, GAGAvatar, Portrait4D-v2, GPAvatar, Avat3r</p>
+      </article>
+      <article class="panel panel--gala">
+        <h4 class="panel__title"><span class="c-gala">GALA</span><span class="c-host">(DynaAvatar)</span></h4>
+        <p class="ranks__bench">on 4D-Dress</p>
+        <p class="ranks__big"><b class="c-gala">3</b> of 3</p>
+        <p class="ranks__sub">metrics best</p>
+        <div class="ranks__cells">
+          <span class="rank rank--b">PSNR</span><span class="rank rank--b">SSIM</span><span class="rank rank--b">LPIPS</span>
+        </div>
+        <p class="ranks__vs">vs IDOL, LHM, PERSONA</p>
+      </article>
+    </div>
+    <p class="note note--legend">
+      <span><i class="rank rank--b"></i>Best</span><span><i class="rank rank--s"></i>2nd best</span><span><i class="rank rank--o"></i>Other</span>
+      <span class="note__right">Quality metrics from the paper; the host itself is not ranked.</span>
+    </p>
+
+    <h3 class="h3 h3--gala">Smaller networks trade quality for speed. GALA doesn’t.</h3>
+    <div class="pareto reveal">
+      <div class="pareto__scroll">
+        <video id="paretoVideo" muted playsinline preload="none" poster="static/img/posters/pareto_build.jpg">
+          <source src="static/video/pareto_build.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="pareto__calls">
+        <p style="--x:21%"><b class="c-gala">22× faster</b><span>than the best distilled network, and more accurate</span><small>FID 3.47 in 5.5 ms vs 3.60 in 124 ms</small></p>
+        <p style="--x:50.8%"><b class="c-host">40× slower</b><span>the only distilled network that is more accurate than ours</span><small>LPIPS 0.100 in 175 ms vs 0.109 in 4.4 ms</small></p>
+        <p style="--x:77.5%"><b class="c-gala">5.7× faster</b><span>than the best distilled network, and more accurate</span><small>LPIPS 0.0455 in 92 ms vs 0.0446 in 16 ms</small></p>
+      </div>
+    </div>
+    <p class="note">
+      Lower is better on both axes. Blue: smaller distilled copies of the host network. Diamond: our final model.
+      <button class="linkbtn" id="paretoReplay" type="button">Replay</button>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ on device -->
+<section class="section" id="device">
+  <div class="container">
+    <div class="device__head">
+      <h2 class="h2 h2--gala">All three hosts, live in a phone’s web browser.</h2>
+      <ul class="cells cells--meta"><li>computed on the phone</li><li>web browser</li><li>iPhone 15</li></ul>
+    </div>
+    <div class="phones reveal">
+      <figure>
+        <figcaption><b class="c-gala">AGORA + GALA</b> 60 fps</figcaption>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/phone_agora.jpg"><source src="static/video/phone_agora.mp4" type="video/mp4"></video>
+      </figure>
+      <figure>
+        <figcaption><b class="c-gala">FlexAvatar + GALA</b> 60 fps</figcaption>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/phone_flex.jpg"><source src="static/video/phone_flex.mp4" type="video/mp4"></video>
+      </figure>
+      <figure>
+        <figcaption><b class="c-gala">DynaAvatar + GALA</b> 60 fps</figcaption>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/phone_dyna.jpg"><source src="static/video/phone_dyna.mp4" type="video/mp4"></video>
+      </figure>
+    </div>
+    <p class="lead lead--after reveal">
+      WebGL only: the network and the blend run as shader passes. No host network runs in the browser.
+    </p>
+
+    <div class="duo reveal">
+      <figure>
+        <h3 class="h3 h3--gala">A whole table of avatars…</h3>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/device_table.jpg"><source src="static/video/device_table.mp4" type="video/mp4"></video>
+        <ul class="cells cells--meta"><li>iPhone 15</li><li>5 heads</li><li>40–50 fps</li></ul>
+      </figure>
+      <figure>
+        <h3 class="h3 h3--gala">…or a crowd.</h3>
+        <video data-autoplay muted loop playsinline preload="none" poster="static/img/posters/device_crowd.jpg"><source src="static/video/device_crowd.mp4" type="video/mp4"></video>
+        <ul class="cells cells--meta"><li>iPhone 15</li><li>5 avatars</li><li>20 fps</li></ul>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ bibtex -->
+<section class="section section--last" id="bibtex">
+  <div class="container">
+    <h2 class="h2">BibTeX</h2>
+    <div class="bib reveal">
+      <button class="linkbtn bib__copy" id="bibCopy" type="button">Copy</button>
+<pre id="bibText">@article{fazylov2026gala,
+  title   = {One Basis to Animate Them All: Gaussian Blendshape Distillation for Real-Time Avatars},
+  author  = {Fazylov, Ramazan and Lefkimmiatis, Stamatis and Laptev, Ivan},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span class="footer__brand">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="10" height="10" fill="#B8352C"/><rect x="11" y="11" width="10" height="10" fill="#2B85C4"/><rect x="20" y="20" width="10" height="10" fill="#2C9A4F"/></svg>
+      One basis to animate them all.
+    </span>
+    <span>Earlier work: <a href="https://ramazan793.github.io/AGORA/" target="_blank" rel="noopener">AGORA</a></span>
+  </div>
+</footer>
+
+<script src="static/js/main.js" defer></script>
+</body>
+</html>

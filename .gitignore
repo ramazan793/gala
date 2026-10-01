@@ -1,0 +1,5 @@
+.DS_Store
+# local build scripts: they hold absolute paths of this machine and the original author photos
+tools/
+# web copy of the paper: not linked from the page
+static/paper/
