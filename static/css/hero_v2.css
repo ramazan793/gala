@@ -1,0 +1,71 @@
+/* v2 of the page (index_v2.html, <body class="v2">), on top of style.css.
+   1. The top: no clip behind the title; the mark, the name, the title, the authors and the links are centred on
+      white, and the block is only as tall as its content, so the video section shows below it.
+   2. The rest: headings, the player, the abstract and every block narrower than the page are centred. */
+
+/* ------------------------------------------------------------ 1. top of the page */
+.hero--v2 { display: block; min-height: 0; }
+.hero--v2 .hero__inner { display: block; padding: clamp(48px, 9vh, 104px) 0 0; text-align: center; }
+.hero--v2 .hero__title { margin-top: 0; }
+
+.hero--v2 .hero__kicker {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 16px;
+  margin: 0 0 clamp(20px, 3vh, 30px);
+  font-size: clamp(16.5px, 1.5vw, 21px);
+}
+.hero--v2 .hero__mark { width: 44px; height: 44px; flex: none; }
+.hero--v2 .hero__kicker b { margin-right: 6px; }
+
+/* sized so that the title stays on one line from tablet width up */
+.hero--v2 h1 { font-size: clamp(33px, 4.5vw, 64px); text-wrap: balance; }
+.hero--v2 .hero__sub { margin-top: 18px; text-wrap: balance; }
+.hero--v2 .hero__kicker span { text-wrap: balance; }
+
+.hero--v2 .authors { justify-content: center; margin: clamp(28px, 4.5vh, 44px) 0 0; }
+.hero--v2 .authors a { text-align: left; }
+.hero--v2 .cells--links { margin-top: clamp(24px, 3.5vh, 34px); }
+
+/* ------------------------------------------------------------ 2. the sections */
+/* headings: centred, with the square cell in line before the text */
+.v2 .h2 { padding-left: 0; text-align: center; text-wrap: balance; }
+.v2 .h2::before { position: static; display: inline-block; margin-right: .45em; vertical-align: .09em; }
+.v2 .h3 { text-align: center; text-wrap: balance; }
+
+/* the video section has no heading in v2: the summary and the player follow the links directly */
+.v2 #video { padding-top: clamp(40px, 5vw, 64px); scroll-margin-top: calc(-1 * clamp(40px, 5vw, 64px)); }
+/* the player is as wide as the window's height allows, now that only the summary sits above it */
+.v2 { --player-w: max(520px, calc((100vh - 250px) * 16 / 9)); }
+
+/* blocks that are narrower than the page sit in the middle */
+.v2 .tldr, .v2 .frame--video, .v2 .abstract, .v2 .lead, .v2 .note, .v2 .unseen, .v2 .blend,
+.v2 .stage, .v2 .result, .v2 .pareto, .v2 .bib { margin-left: auto; margin-right: auto; }
+.v2 .lead, .v2 .note, .v2 .facts, .v2 .stage { text-align: center; }
+.v2 .lead, .v2 .stage p { text-wrap: balance; }
+.v2 .tabs { justify-content: center; }
+
+/* the abstract reads as a paragraph: only its heading is centred */
+.v2 .abstract p { text-align: left; }
+.v2 .abstract { text-align: center; }
+
+/* the credit line for the host models, under the result clips */
+.v2 .results + .note--refs { margin-top: 18px; }
+
+/* finding: sentence over formula, both centred in their half */
+.v2 .finding__step { align-items: center; text-align: center; }
+.v2 .finding__legend { justify-content: center; }
+.v2 .finding__legend dt { white-space: nowrap; }
+
+/* method: the small comparison and the formula row under the stage text */
+.v2 .compare { text-align: left; }
+.v2 .eqrow { justify-content: center; }
+
+/* on device: the caption cells under the heading, and under each of the two clips */
+.v2 .device__head { flex-direction: column; align-items: center; }
+.v2 .duo figure { text-align: center; }
+
+@media (max-width: 640px) {
+  .hero--v2 .hero__inner { padding-top: 36px; }
+  .hero--v2 .hero__mark { width: 36px; height: 36px; }
+  /* the cards stack with their photos in one column, and the column as a whole is centred */
+  .hero--v2 .authors { display: inline-flex; flex-direction: column; align-items: flex-start; }
+}

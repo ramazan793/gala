@@ -14,9 +14,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="static/img/favicon.svg">
   <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/hero_v2.css">
   <script>document.documentElement.className = 'js';</script>
 </head>
-<body>
+<body class="v2">
 
 <header class="nav" id="nav">
   <div class="container nav__inner">
@@ -39,17 +40,14 @@
 <main>
 
 <!-- ============================================================ hero -->
-<section class="hero" id="top">
-  <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="static/img/posters/hero_crowd.jpg" aria-hidden="true">
-    <source src="static/video/hero_crowd.mp4" type="video/mp4">
-  </video>
-  <div class="hero__scrim"></div>
+<!-- v2: no clip behind the title; mark, name, title, authors and links centred on white -->
+<section class="hero hero--v2" id="top">
   <div class="container hero__inner">
-    <ul class="cells cells--meta hero__meta" aria-label="About the clip in the background">
-      <li>web browser</li><li>10 avatars</li><li>30 fps</li>
-    </ul>
     <div class="hero__title">
-      <p class="hero__kicker"><b>GALA</b> Gaussian Animation via Linear Approximation</p>
+      <p class="hero__kicker">
+        <svg class="hero__mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="10" height="10" fill="#B8352C"/><rect x="11" y="11" width="10" height="10" fill="#2B85C4"/><rect x="20" y="20" width="10" height="10" fill="#2C9A4F"/></svg>
+        <span><b>GALA:</b> Gaussian Animation via Linear Approximation</span>
+      </p>
       <h1>One Basis to Animate Them&nbsp;All</h1>
       <p class="hero__sub">Gaussian Blendshape Distillation for Real-Time Avatars</p>
 
@@ -87,9 +85,8 @@
 </section>
 
 <!-- ============================================================ video + abstract -->
-<section class="section" id="video">
+<section class="section" id="video" aria-label="Overview video and abstract">
   <div class="container">
-    <h2 class="h2">The whole idea in three minutes.</h2>
     <p class="tldr reveal">
       <b class="tldr__tag">TL;DR</b>
       <span>
@@ -166,6 +163,7 @@
 </section>
 
 <!-- ============================================================ speed -->
+<!-- left out of v2 (too much at this point of the page); delete this comment's two marker lines to bring it back
 <section class="section" id="speed">
   <div class="container">
     <h2 class="h2 h2--gala">Up to three orders of magnitude faster.</h2>
@@ -219,6 +217,7 @@
     </p>
   </div>
 </section>
+-->
 
 <!-- ============================================================ finding -->
 <section class="section" id="finding">
@@ -374,6 +373,10 @@
         <div class="triple triple--foot"><span class="c-host">42.9 s / frame</span><span class="c-gala">16.1 ms / frame</span><span class="colorbar"><img src="static/img/glyphs/inferno_bar.png" alt=""><i>0 – 0.2</i></span></div>
       </div>
     </div>
+    <p class="note note--refs">
+      Hosts: <a href="https://ramazan793.github.io/AGORA/" target="_blank" rel="noopener">AGORA</a> (Fazylov et al.),
+      FlexAvatar (Kirschstein et al., CVPR 2026), DynaAvatar (Kwon et al., CVPR 2026).
+    </p>
 
     <h3 class="h3 h3--gala">Ahead of the state of the art on most metrics.</h3>
     <div class="ranks reveal">
@@ -416,6 +419,7 @@
       <span class="note__right">Quality metrics from the paper; the host itself is not ranked.</span>
     </p>
 
+    <!-- left out of v2; delete this comment's two marker lines to bring it back
     <h3 class="h3 h3--gala">Smaller networks trade quality for speed. GALA doesn’t.</h3>
     <div class="pareto reveal">
       <div class="pareto__scroll">
@@ -433,6 +437,7 @@
       Lower is better on both axes. Blue: smaller distilled copies of the host network. Diamond: our final model.
       <button class="linkbtn" id="paretoReplay" type="button">Replay</button>
     </p>
+    -->
   </div>
 </section>
 
