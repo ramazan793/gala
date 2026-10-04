@@ -106,13 +106,10 @@
     </ul>
     <div class="abstract">
       <h3 class="h3 h3--plain">Abstract</h3>
-      <!-- the first two sentences show; the button opens the rest (without the script everything shows) -->
       <p>
         3D Gaussian avatars support fast rendering, however, their real-time animation is often challenged by the
         costly neural inference. We address this bottleneck and show that the animation of pretrained avatar models
-        can be closely approximated by a linear combination of identity-independent blendshapes.
-        <button class="abstract__toggle" id="abstractToggle" type="button" aria-expanded="false" aria-controls="abstractRest" aria-label="Show the rest of the abstract">…</button>
-        <span class="abstract__rest" id="abstractRest">Building on this
+        can be closely approximated by a linear combination of identity-independent blendshapes. Building on this
         finding, we introduce <b>GALA</b> (<b>G</b>aussian <b>A</b>nimation via <b>L</b>inear <b>A</b>pproximation),
         a distillation method that replaces per-frame heavy neural decoding with a shallow coefficient predictor and
         a linear blend. To improve fidelity and reduce memory requirements, we propose to construct the basis using
@@ -123,9 +120,8 @@
         to held-out identities and reduces CPU animation cost by up to three orders of magnitude while preserving most
         of the rendering quality. Excellent results of our method confirm the shared linear structure of learned
         avatar representations and enable highly efficient and accurate animation at frame rates reaching up to
-        <span class="nb">60fps</span> on mobile devices.</span>
+        <span class="nb">60fps</span> on mobile devices.
       </p>
-      <button class="linkbtn abstract__less" id="abstractLess" type="button">Show less</button>
     </div>
     </div>
   </div>

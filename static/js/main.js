@@ -251,20 +251,6 @@
     }
   })();
 
-  /* ---------------------------------------------------------- abstract: two sentences, the rest on demand */
-  (function () {
-    var more = $('#abstractToggle');
-    var less = $('#abstractLess');
-    var box = more && more.closest('.abstract');
-    if (!box) { return; }
-    function set(open) {
-      box.classList.toggle('is-open', open);
-      more.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-    more.addEventListener('click', function () { set(true); });
-    if (less) { less.addEventListener('click', function () { set(false); }); }
-  })();
-
   /* ---------------------------------------------------------- BibTeX copy */
   (function () {
     var btn = $('#bibCopy');

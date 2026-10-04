@@ -8,13 +8,14 @@
 .hero--v2 .hero__inner { display: block; padding: clamp(48px, 9vh, 104px) 0 0; text-align: center; }
 .hero--v2 .hero__title { margin-top: 0; }
 
+/* the mark and "GALA: Gaussian Animation via Linear Approximation", the first thing on the page */
 .hero--v2 .hero__kicker {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 16px;
-  margin: 0 0 clamp(20px, 3vh, 30px);
-  font-size: clamp(16.5px, 1.5vw, 21px);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px;
+  margin: 0 0 clamp(22px, 3.4vh, 34px);
+  font-size: clamp(19px, 2.05vw, 28px); line-height: 1.3; color: #333;
 }
-.hero--v2 .hero__mark { width: 44px; height: 44px; flex: none; }
-.hero--v2 .hero__kicker b { margin-right: 6px; }
+.hero--v2 .hero__mark { width: 58px; height: 58px; flex: none; }
+.hero--v2 .hero__kicker b { margin-right: 8px; }
 
 /* sized so that the title stays on one line from tablet width up */
 .hero--v2 h1 { font-size: clamp(33px, 4.5vw, 64px); text-wrap: balance; }
@@ -68,7 +69,8 @@
 
 @media (max-width: 640px) {
   .hero--v2 .hero__inner { padding-top: 36px; }
-  .hero--v2 .hero__mark { width: 36px; height: 36px; }
+  .hero--v2 .hero__mark { width: 44px; height: 44px; }
+  .hero--v2 .hero__kicker { font-size: 18.5px; }
   .hero--v2 .authors { gap: 2px 6px; }
   .hero--v2 .authors a { padding: 6px 10px; }
   .hero--v2 .authors b { font-size: 16.5px; }
