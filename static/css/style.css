@@ -448,6 +448,10 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; background: v
 .duo video { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; background: var(--band); }
 .duo .cells { margin-top: 12px; }
 
+/* ------------------------------------------------------------ acknowledgements */
+.ack { max-width: 900px; margin: 0; font-size: 17px; line-height: 1.65; color: var(--grey); }
+.ack a { color: var(--ink); }
+
 /* ------------------------------------------------------------ bibtex + footer */
 .bib { position: relative; max-width: 900px; border: 1.5px solid var(--hair); }
 .bib pre { margin: 0; padding: 20px 22px; overflow-x: auto; font-family: var(--font-mono); font-size: 14.5px; line-height: 1.6; color: var(--ink); }
@@ -509,7 +513,7 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; background: v
   .cells--links > * { padding: 12px 10px; }
   .ico { margin-right: 6px; }
   .lead, .stage p, .finding__step p { font-size: 16.5px; }
-  .abstract p { font-size: 16px; }
+  .abstract p, .ack { font-size: 16px; }
   .facts span { font-size: 14.5px; }
   .tldr { grid-template-columns: 1fr; }
   .tldr__tag { justify-self: start; padding: 7px 14px; font-size: 14px; }

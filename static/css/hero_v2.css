@@ -42,7 +42,7 @@
 
 /* blocks that are narrower than the page sit in the middle */
 .v2 .tldr, .v2 .frame--video, .v2 .abstract, .v2 .lead, .v2 .note, .v2 .unseen, .v2 .blend,
-.v2 .stage, .v2 .result, .v2 .pareto, .v2 .bib { margin-left: auto; margin-right: auto; }
+.v2 .stage, .v2 .result, .v2 .pareto, .v2 .ack, .v2 .bib { margin-left: auto; margin-right: auto; }
 .v2 .lead, .v2 .note, .v2 .facts, .v2 .stage { text-align: center; }
 .v2 .lead, .v2 .stage p { text-wrap: balance; }
 .v2 .tabs { justify-content: center; }
